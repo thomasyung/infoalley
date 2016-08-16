@@ -1,0 +1,169 @@
+/* Reset CSS
+ * --------------------------------------- */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+form,fieldset,input,textarea,p,blockquote,th,td {
+    padding: 0;
+    margin: 0;
+}
+a{
+	text-decoration:none;
+}
+table {
+    border-spacing: 0;
+}
+fieldset,img {
+    border: 0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-weight: normal;
+    font-style: normal;
+}
+strong{
+	font-weight: bold;
+}
+ol,ul {
+    list-style: none;
+    margin:0;
+    padding:0;
+}
+caption,th {
+    text-align: left;
+
+}
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-size: 100%;
+    margin:0;
+    padding:0;
+    color:#444;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border: 0;
+}
+
+
+/* Custom CSS
+ * --------------------------------------- */
+body {
+  font-size: 100%;
+  line-height: 1.6875;
+  font-family: 'Space Mono', monospace;
+}
+
+#panel-one {
+  display: inline-block;
+  position: fixed;
+  width: 50%;
+  height: 46%;
+  background-color: #eee;
+  top: 0;
+  left: 0;
+}
+
+#panel-two {
+  display: inline-block;
+  position: fixed;
+  width: 50%;
+  height: 46%;
+  background-color: #333;
+  top: 0;
+  right: 0;
+}
+
+#panel-three {
+  display: inline-block;
+  position: fixed;
+  width: 50%;
+  height: 46%;
+  background-color: #ccc;
+  bottom: 8%;
+  left: 0;
+}
+
+#panel-four {
+  display: inline-block;
+  position: fixed;
+  width: 50%;
+  height: 46%;
+  background-color: #ddd;
+  bottom: 8%;
+  right: 0;
+}
+
+#ticker-bottom {
+  display: inline-block;
+  position: fixed;
+  width: 100%;
+  height: 8%;
+  background-color: blue;
+  bottom: 0;
+  left: 0;
+  padding-left: 100%;
+}
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker {
+  display: inline-block;
+  height: 4rem;
+  line-height: 4rem;
+  white-space: nowrap;
+  padding-right: 100%;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+  -webkit-animation-name: ticker;
+  animation-name: ticker;
+  -webkit-animation-duration: 160s;
+  animation-duration: 160s;
+}
+
+.ticker_item {
+  display: inline-block;
+  padding: 0 2rem;
+  font-size: 2rem;
+  color: white;
+}
+
+/* Responsive Breakpoints
+ * --------------------------------------- */
+@media only screen and (max-width: 400px) {
+  body { font-size:90%;}
+}
+
+@media only screen and (max-width: 800px) {
+  body { font-size:100%;}
+} 
+
+@media only screen and (max-width: 1100px) {
+  body { font-size:120%;}
+}
+
+@media only screen and (min-width: 1100px) {
+  body { font-size:200%;}
+}

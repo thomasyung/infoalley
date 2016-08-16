@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Info Alley Admin</title>
+    <link id="favicon" rel="icon" href="https://hyperweb.space/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <style>
+      /* UNDER DEVELOPMENT -- move these to style.css when done. 
+         TODO: Chance to use Flexbox -> https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+      */
+      #admin-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- The Admin Interface 
+    TODO: Need to make it look nice
+    -->
+    <div id="admin-wrapper">
+      <div id="admin-panels">
+        <button id="one">1</button>
+        <button id="two">2</button>
+        <button id="three">3</button>
+        <button id="four">4</button>
+        <button id="reset">reset</button>
+      </div>
+      <div id="admin-twitter">
+        <label for="hashtag">Twitter Hashtag
+          <input type="text" name="hashtag" value="#ux">
+          <button id="hashtag">Update</button>
+        </label>
+      </div>
+    </div>
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      $(function(){
+        var socket = io();
+        $('#one').click(function(){
+          var button = $(this).attr('id');
+          socket.emit("button_pressed", button);
+        });
+        $('#two').click(function(){
+          var button = $(this).attr('id');
+          socket.emit("button_pressed", button);
+        });
+        $('#three').click(function(){
+          var button = $(this).attr('id');
+          socket.emit("button_pressed", button);
+        });
+        $('#four').click(function(){
+          var button = $(this).attr('id');
+          socket.emit("button_pressed", button);
+        });
+        $('#reset').click(function(){
+          var button = $(this).attr('id');
+          socket.emit("button_pressed", button);
+        });
+        $('#hashtag').click(function(){
+          var hashtag = $('input[name=hashtag]').val();
+          socket.emit("update_hashtag", hashtag);
+        });
+      });
+    </script>
+  </body>
+  </html>
