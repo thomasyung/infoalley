@@ -5,6 +5,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
+var reqModule = require("request");
 
 // socket.io api -- see docs at https://socket.io
 var io = require('socket.io')(http); // enable websockets support
@@ -60,6 +61,28 @@ app.get("/tweets", function (request, response) {
     response.send(data.statuses);
   });
 });
+
+app.get("/events", function (request, response) {
+  
+  var url = "http://www.downtownrochestermn.com/_feeds/list_events_json.pxp";
+  var display = {};
+  var data = {};
+  var feed = [];
+  var singleItem = {};
+  
+  var responseArray = [];
+  
+  reqModule(url, function (error, res, body) {
+    if (!error && res.statusCode == 200) {
+      data = JSON.parse(body);
+      feed = data.item;
+      // singleItem = feed[0];
+      response.send(feed);
+    }
+  });
+});
+
+//2nd call to city-lights for individual event obj - need to pass evid
 
 // listen for requests :)
 listener = http.listen(process.env.PORT, function () {

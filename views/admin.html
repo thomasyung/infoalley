@@ -18,6 +18,10 @@
         align-items: center;
         flex-direction: column;
         height: 100vh;
+        margin: 0 1em;
+      }
+      input[type=text] {
+        width: 80vw;
       }
     </style>
   </head>
@@ -33,10 +37,32 @@
         <button id="four">4</button>
         <button id="reset">reset</button>
       </div>
+      <br>
       <div id="admin-twitter">
-        <label for="hashtag">Twitter Hashtag
+        <label for="hashtag">Twitter Hashtag<br>
           <input type="text" name="hashtag" value="#ux">
           <button id="hashtag">Update</button>
+        </label>
+      </div>
+      <br>
+      <div id="admin-panel-one">
+        <label for="panel-one">Panel One<br>
+          <input type="text" name="panel-one" value="https://www.youtube.com/embed/cnfX3J1oKLY?list=PLSWR1ylG_6JYmxa73dQ8kpWK3d6_V1vWT">
+          <button id="panel-one-btn">Update</button>
+        </label>
+      </div>
+      <br>
+      <div id="admin-panel-three">
+        <label for="panel-three">Panel Three<br>
+          <input type="text" name="panel-three" value="https://docs.google.com/presentation/d/1izQfUkKiiy-JxbRolJbOT4G1rCVCrUytY6LV-sfS4Ig/embed?start=true&loop=true&delayms=5000&rm=minimal">
+          <button id="panel-three-btn">Update</button>
+        </label>
+      </div>
+      <br>
+      <div id="admin-panel-four">
+        <label for="p">Panel Four<br>
+          <input type="text" name="panel-four" value="">
+          <button id="panel-four-btn">Update</button>
         </label>
       </div>
     </div>
@@ -48,27 +74,43 @@
         var socket = io();
         $('#one').click(function(){
           var button = $(this).attr('id');
-          socket.emit("button_pressed", button);
+          socket.emit("button_pressed", {"button_pressed": button});
         });
         $('#two').click(function(){
           var button = $(this).attr('id');
-          socket.emit("button_pressed", button);
+          socket.emit("button_pressed", {"button_pressed": button});
         });
         $('#three').click(function(){
           var button = $(this).attr('id');
-          socket.emit("button_pressed", button);
+          socket.emit("button_pressed", {"button_pressed": button});
         });
         $('#four').click(function(){
           var button = $(this).attr('id');
-          socket.emit("button_pressed", button);
+          socket.emit("button_pressed", {"button_pressed": button});
         });
         $('#reset').click(function(){
           var button = $(this).attr('id');
-          socket.emit("button_pressed", button);
+          socket.emit("button_pressed", {"button_pressed": button});
         });
         $('#hashtag').click(function(){
+          var button = $(this).attr('id');
           var hashtag = $('input[name=hashtag]').val();
-          socket.emit("update_hashtag", hashtag);
+          socket.emit("button_pressed", {"button_pressed": button, "value": hashtag});
+        });
+        $('#panel-one-btn').click(function(){
+          var button = $(this).attr('id');
+          var src = $('input[name=panel-one]').val();
+          socket.emit("button_pressed", {"button_pressed": button, "value": src});
+        });
+        $('#panel-three-btn').click(function(){
+          var button = $(this).attr('id');
+          var src = $('input[name=panel-three]').val();
+          socket.emit("button_pressed", {"button_pressed": button, "value": src});
+        });
+        $('#panel-four-btn').click(function(){
+          var button = $(this).attr('id');
+          var src = $('input[name=panel-four]').val();
+          socket.emit("button_pressed", {"button_pressed": button, "value": src});
         });
       });
     </script>

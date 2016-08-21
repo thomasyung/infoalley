@@ -3,19 +3,39 @@ var socket = io();
   
 $(function() {
   
+  // Fill content in the panels from YouTube or Google Slides
+  if (localStorage.getItem('panel-one')) {
+    $('#panel-one').html(IFRAME_TEMPLATE(localStorage.getItem('panel-one')));
+  }
+  if (localStorage.getItem('panel-three')) {
+    $('#panel-three').html(IFRAME_TEMPLATE(localStorage.getItem('panel-three')));
+  }
+  if (localStorage.getItem('panel-four')) {
+    $('#panel-four').html(IFRAME_TEMPLATE(localStorage.getItem('panel-four')));
+  }
+  
   // listen for button pressed/tapped from admin interface
   socket.on('button_pressed', function(btn){
-    if (btn === "one"){
+    if (btn.button_pressed === "one"){
       fullscreenPanelOne();
-    } else if (btn === "two"){
+    } else if (btn.button_pressed === "two"){
       fullscreenPanelTwo();
-    } else if (btn === "three"){
+    } else if (btn.button_pressed === "three"){
       fullscreenPanelThree();
-    } else if (btn === "four"){
+    } else if (btn.button_pressed === "four"){
       fullscreenPanelFour();
-    } else if (btn === "reset"){
+    } else if (btn.button_pressed === "reset"){
       resetPanels();
-    }
+    } else if (btn.button_pressed === "panel-one-btn"){
+      localStorage.setItem('panel-one', btn.value);
+      $('#panel-one').html(IFRAME_TEMPLATE(btn.value));
+    } else if (btn.button_pressed === "panel-three-btn"){
+      localStorage.setItem('panel-three', btn.value);
+      $('#panel-three').html(IFRAME_TEMPLATE(btn.value));
+    } else if (btn.button_pressed === "panel-four-btn"){
+      localStorage.setItem('panel-four', btn.value);
+      $('#panel-four').html(IFRAME_TEMPLATE(btn.value));
+    } 
   });
   
   // keyboard event handlers -- in case socket.io is not available
@@ -71,3 +91,7 @@ $(function() {
   };
   
 });
+
+var IFRAME_TEMPLATE = function(src){
+  return '<iframe width="100%" height="100%" src="'+src+'" frameborder="0" allowfullscreen></iframe>';
+};
