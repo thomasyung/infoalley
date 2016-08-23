@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Info Alley Admin</title>
+    <link id="favicon" rel="icon" href="https://hyperweb.space/favicon.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body id="body-wrapper">
+    <div id="admin-wrapper">
+      <div>
+        <button class="panel-btn" id="one">1</button>
+        <button class="panel-btn" id="two">2</button>
+        <button class="panel-btn" id="three">3</button>
+        <button class="panel-btn" id="four">4</button>
+        <button class="panel-btn" id="reset">reset</button>
+      </div>
+      <br>
+      <div class="admin-panel">
+        <label for="hashtag">Twitter Hashtag<br>
+          <input type="text" name="hashtag" value="">
+          <button id="hashtag">Update</button>
+        </label>
+      </div>
+      <br>
+      <div class="admin-panel">
+        <label for="panel-one">Panel One<br>
+          <input type="text" name="panel-one" value="">
+          <button id="panel-one-btn">Update</button>
+          <button id="panel-one-play" class="panel-btn">Play</button>
+          <button id="panel-one-pause" class="panel-btn">Pause</button>
+        </label>
+      </div>
+      <br>
+      <div class="admin-panel">
+        <label for="panel-two">Panel Two<br>
+          <input type="text" name="panel-two" value="">
+          <button id="panel-two-btn">Update</button>
+          <button id="panel-two-play" class="panel-btn">Play</button>
+          <button id="panel-two-pause" class="panel-btn">Pause</button>
+        </label>
+      </div>
+      <br>
+      <div class="admin-panel">
+        <label for="panel-three">Panel Three<br>
+          <input type="text" name="panel-three" value="">
+          <button id="panel-three-btn">Update</button>
+          <button id="panel-three-play" class="panel-btn">Play</button>
+          <button id="panel-three-pause" class="panel-btn">Pause</button>
+        </label>
+      </div>
+      <br>
+      <div class="admin-panel">
+        <label for="p">Panel Four<br>
+          <input type="text" name="panel-four" value="">
+          <button id="panel-four-btn">Update</button>
+          <button id="panel-four-play" class="panel-btn">Play</button>
+          <button id="panel-four-pause" class="panel-btn">Pause</button>
+        </label>
+      </div>
+    </div>
+    <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="/firebase-init.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/admin-init.js"></script>
+  </body>
+  </html>

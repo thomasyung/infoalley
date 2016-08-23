@@ -1,0 +1,32 @@
+{
+	"//1": "describes your app and its dependencies",
+	"//2": "https://docs.npmjs.com/files/package.json",
+	"//3": "updating this file will download and update your packages.",
+	"name": "infoalley",
+	"version": "0.0.3",
+	"description": "Info Alley",
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"express": "^5.0.0-alpha.2",
+		"socket.io": "^1.4.8",
+		"twit": "^2.2.4",
+		"request": "^2.74.0"
+	},
+	"engines": {
+		"node": "5.4.1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thomasyung/infoalley"
+	},
+	"keywords": [
+		"node",
+		"hyperdev",
+		"express",
+		"twitter"
+	],
+	"license": "MIT"
+}
