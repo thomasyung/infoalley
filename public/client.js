@@ -3,38 +3,71 @@ var socket = io();
   
 $(function() {
   
-  // Fill content in the panels from YouTube or Google Slides
-  if (localStorage.getItem('panel-one')) {
-    $('#panel-one').html(IFRAME_TEMPLATE(localStorage.getItem('panel-one')));
-  }
-  if (localStorage.getItem('panel-three')) {
-    $('#panel-three').html(IFRAME_TEMPLATE(localStorage.getItem('panel-three')));
-  }
-  if (localStorage.getItem('panel-four')) {
-    $('#panel-four').html(IFRAME_TEMPLATE(localStorage.getItem('panel-four')));
-  }
+  var dbRef = firebase.database().ref('/config');
+  dbRef.once('value').then(function(snapshot){
+    var config = snapshot.val();
+    // Fill content in the panels
+    if (config.panel_one){
+      $('#panel-one').html(IFRAME_TEMPLATE(config.panel_one));
+    }
+    if (config.panel_two){
+      $('#panel-two').html(IFRAME_TEMPLATE(config.panel_two));
+    }
+    if (config.panel_three){
+      $('#panel-three').html(IFRAME_TEMPLATE(config.panel_three));
+    }
+    if (config.panel_four){
+      $('#panel-four').html(IFRAME_TEMPLATE(config.panel_four));
+    }
+    if (config.hashtag){
+      $.get('/istweetstreamstarted', function(status){
+        console.log(status);
+        if (status === "false"){
+          $.post('/starttweetstream?' + $.param({"hashtag": config.hashtag}), function() {
+            getTweets();
+          });
+        } else if (status === "true"){
+          getTweets();
+        }
+      });
+    }
+  });
   
   // listen for button pressed/tapped from admin interface
   socket.on('button_pressed', function(btn){
     if (btn.button_pressed === "one"){
       fullscreenPanelOne();
+    } else if (btn.button_pressed === "panel-one-play"){
+      commandYouTube({'command':'playVideo','div':'panel-one'});
+    } else if (btn.button_pressed === "panel-one-pause"){
+      commandYouTube({'command':'pauseVideo','div':'panel-one'});
     } else if (btn.button_pressed === "two"){
       fullscreenPanelTwo();
     } else if (btn.button_pressed === "three"){
       fullscreenPanelThree();
+    } else if (btn.button_pressed === "panel-three-play"){
+      commandYouTube({'command':'playVideo','div':'panel-three'});
+    } else if (btn.button_pressed === "panel-three-pause"){
+      commandYouTube({'command':'pauseVideo','div':'panel-three'});
     } else if (btn.button_pressed === "four"){
       fullscreenPanelFour();
+    } else if (btn.button_pressed === "panel-four-play"){
+      commandYouTube({'command':'playVideo','div':'panel-four'});
+    } else if (btn.button_pressed === "panel-four-pause"){
+      commandYouTube({'command':'pauseVideo','div':'panel-four'});
     } else if (btn.button_pressed === "reset"){
       resetPanels();
     } else if (btn.button_pressed === "panel-one-btn"){
-      localStorage.setItem('panel-one', btn.value);
       $('#panel-one').html(IFRAME_TEMPLATE(btn.value));
     } else if (btn.button_pressed === "panel-three-btn"){
-      localStorage.setItem('panel-three', btn.value);
       $('#panel-three').html(IFRAME_TEMPLATE(btn.value));
     } else if (btn.button_pressed === "panel-four-btn"){
-      localStorage.setItem('panel-four', btn.value);
       $('#panel-four').html(IFRAME_TEMPLATE(btn.value));
+    } else if (btn.button_pressed === "hashtag"){
+      clearTweets();
+      $.post('/starttweetstream?' + $.param({"hashtag": btn.value}), function() {
+        getTweets();
+      });
     } 
   });
   
@@ -59,7 +92,6 @@ $(function() {
     $('#panel-three').css({'width':'0%', 'height':'0%'});
     $('#panel-two').css({'width':'0%', 'height':'0%'});
     $('#panel-one').css({'width':'100%', 'height':'92%'});
-    //$('#panel-one').html('<iframe width="100%" height="100%" src="https://www.youtube.com/embed/cnfX3J1oKLY?list=PLSWR1ylG_6JYmxa73dQ8kpWK3d6_V1vWT&amp;controls=0&amp;autoplay=1" frameborder="0" allowfullscreen></iframe>');
   };
   
   var fullscreenPanelTwo = function(){
@@ -90,8 +122,14 @@ $(function() {
     $('#panel-one').css({'width':'50%', 'height':'46%'});
   };
   
+  var commandYouTube = function(options){
+    var div = document.getElementById(options.div);
+    var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+    iframe.postMessage('{"event":"command","func":"' + options.command + '","args":""}','*');
+  };
+  
 });
 
 var IFRAME_TEMPLATE = function(src){
-  return '<iframe width="100%" height="100%" src="'+src+'" frameborder="0" allowfullscreen></iframe>';
+  return '<iframe width="100%" height="100%" src="' + src + '" frameborder="0" allowfullscreen></iframe>';
 };

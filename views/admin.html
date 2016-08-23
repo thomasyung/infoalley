@@ -8,111 +8,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
     <link rel="stylesheet" href="/style.css">
-    <style>
-      /* UNDER DEVELOPMENT -- move these to style.css when done. 
-         TODO: Chance to use Flexbox -> https://css-tricks.com/snippets/css/a-guide-to-flexbox/
-      */
-      #admin-wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        height: 100vh;
-        margin: 0 1em;
-      }
-      input[type=text] {
-        width: 80vw;
-      }
-    </style>
   </head>
-  <body>
-    <!-- The Admin Interface 
-    TODO: Need to make it look nice
-    -->
+  <body id="body-wrapper">
     <div id="admin-wrapper">
-      <div id="admin-panels">
-        <button id="one">1</button>
-        <button id="two">2</button>
-        <button id="three">3</button>
-        <button id="four">4</button>
-        <button id="reset">reset</button>
+      <div>
+        <button class="panel-btn" id="one">1</button>
+        <button class="panel-btn" id="two">2</button>
+        <button class="panel-btn" id="three">3</button>
+        <button class="panel-btn" id="four">4</button>
+        <button class="panel-btn" id="reset">reset</button>
       </div>
       <br>
-      <div id="admin-twitter">
+      <div class="admin-panel">
         <label for="hashtag">Twitter Hashtag<br>
-          <input type="text" name="hashtag" value="#ux">
+          <input type="text" name="hashtag" value="">
           <button id="hashtag">Update</button>
         </label>
       </div>
       <br>
-      <div id="admin-panel-one">
+      <div class="admin-panel">
         <label for="panel-one">Panel One<br>
-          <input type="text" name="panel-one" value="https://www.youtube.com/embed/cnfX3J1oKLY?list=PLSWR1ylG_6JYmxa73dQ8kpWK3d6_V1vWT">
+          <input type="text" name="panel-one" value="">
           <button id="panel-one-btn">Update</button>
+          <button id="panel-one-play" class="panel-btn">Play</button>
+          <button id="panel-one-pause" class="panel-btn">Pause</button>
         </label>
       </div>
       <br>
-      <div id="admin-panel-three">
+      <div class="admin-panel">
+        <label for="panel-two">Panel Two<br>
+          <input type="text" name="panel-two" value="">
+          <button id="panel-two-btn">Update</button>
+          <button id="panel-two-play" class="panel-btn">Play</button>
+          <button id="panel-two-pause" class="panel-btn">Pause</button>
+        </label>
+      </div>
+      <br>
+      <div class="admin-panel">
         <label for="panel-three">Panel Three<br>
-          <input type="text" name="panel-three" value="https://docs.google.com/presentation/d/1izQfUkKiiy-JxbRolJbOT4G1rCVCrUytY6LV-sfS4Ig/embed?start=true&loop=true&delayms=5000&rm=minimal">
+          <input type="text" name="panel-three" value="">
           <button id="panel-three-btn">Update</button>
+          <button id="panel-three-play" class="panel-btn">Play</button>
+          <button id="panel-three-pause" class="panel-btn">Pause</button>
         </label>
       </div>
       <br>
-      <div id="admin-panel-four">
+      <div class="admin-panel">
         <label for="p">Panel Four<br>
           <input type="text" name="panel-four" value="">
           <button id="panel-four-btn">Update</button>
+          <button id="panel-four-play" class="panel-btn">Play</button>
+          <button id="panel-four-pause" class="panel-btn">Pause</button>
         </label>
       </div>
     </div>
     <!-- Your web-app is https, so your scripts need to be too -->
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="/firebase-init.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-      $(function(){
-        var socket = io();
-        $('#one').click(function(){
-          var button = $(this).attr('id');
-          socket.emit("button_pressed", {"button_pressed": button});
-        });
-        $('#two').click(function(){
-          var button = $(this).attr('id');
-          socket.emit("button_pressed", {"button_pressed": button});
-        });
-        $('#three').click(function(){
-          var button = $(this).attr('id');
-          socket.emit("button_pressed", {"button_pressed": button});
-        });
-        $('#four').click(function(){
-          var button = $(this).attr('id');
-          socket.emit("button_pressed", {"button_pressed": button});
-        });
-        $('#reset').click(function(){
-          var button = $(this).attr('id');
-          socket.emit("button_pressed", {"button_pressed": button});
-        });
-        $('#hashtag').click(function(){
-          var button = $(this).attr('id');
-          var hashtag = $('input[name=hashtag]').val();
-          socket.emit("button_pressed", {"button_pressed": button, "value": hashtag});
-        });
-        $('#panel-one-btn').click(function(){
-          var button = $(this).attr('id');
-          var src = $('input[name=panel-one]').val();
-          socket.emit("button_pressed", {"button_pressed": button, "value": src});
-        });
-        $('#panel-three-btn').click(function(){
-          var button = $(this).attr('id');
-          var src = $('input[name=panel-three]').val();
-          socket.emit("button_pressed", {"button_pressed": button, "value": src});
-        });
-        $('#panel-four-btn').click(function(){
-          var button = $(this).attr('id');
-          var src = $('input[name=panel-four]').val();
-          socket.emit("button_pressed", {"button_pressed": button, "value": src});
-        });
-      });
-    </script>
+    <script src="/admin-init.js"></script>
   </body>
   </html>
