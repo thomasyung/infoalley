@@ -147,7 +147,7 @@ body {
  * --------------------------------------- */
 #body-wrapper { /* applied to the body tag to get a margin and a default background color */
   margin: 1em;
-  background-color: #ddd;
+  background-color: #BBDEFB;
 }
 #admin-wrapper {
   /* Using Flexbox to vertically and horizontally center content -> https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
@@ -187,7 +187,7 @@ input[type=text] {
   padding: 1em;
 }
 .event-item:nth-child(odd) {
-  background-color: #fff;
+  background-color: #FFFFFF;
 }
 
 /* Responsive Breakpoints
