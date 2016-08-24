@@ -43,6 +43,10 @@ $(function() {
       commandYouTube({'command':'pauseVideo','div':'panel-one'});
     } else if (btn.button_pressed === "two"){
       fullscreenPanelTwo();
+    } else if (btn.button_pressed === "panel-two-play"){
+      commandYouTube({'command':'playVideo','div':'panel-two'});
+    } else if (btn.button_pressed === "panel-two-pause"){
+      commandYouTube({'command':'pauseVideo','div':'panel-two'});
     } else if (btn.button_pressed === "three"){
       fullscreenPanelThree();
     } else if (btn.button_pressed === "panel-three-play"){
@@ -59,6 +63,8 @@ $(function() {
       resetPanels();
     } else if (btn.button_pressed === "panel-one-btn"){
       $('#panel-one').html(IFRAME_TEMPLATE(btn.value));
+    } else if (btn.button_pressed === "panel-two-btn"){
+      $('#panel-two').html(IFRAME_TEMPLATE(btn.value));
     } else if (btn.button_pressed === "panel-three-btn"){
       $('#panel-three').html(IFRAME_TEMPLATE(btn.value));
     } else if (btn.button_pressed === "panel-four-btn"){
